@@ -1,0 +1,13 @@
+<!ELEMENT users (user+)>
+
+<!ELEMENT user (name, surname, cookingSkillLevel, preferredCuisineType)>
+<!ATTLIST user id CDATA #REQUIRED>
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+
+<!ELEMENT cookingSkillLevel (#PCDATA)>
+<!ATTLIST cookingSkillLevel value (Beginner|Intermediate|Advanced) "Beginner">
+
+<!ELEMENT preferredCuisineType (#PCDATA)>
+<!ATTLIST preferredCuisineType value (Italian|Asian|French|Mexican|Mediterranean|Indian|American|Japanese) "Italian">

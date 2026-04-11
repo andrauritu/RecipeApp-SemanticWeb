@@ -1,0 +1,14 @@
+<!ELEMENT recipes (recipe+)>
+
+<!ELEMENT recipe (title, cuisineTypes, difficulty)>
+<!ATTLIST recipe id CDATA #REQUIRED>
+
+<!ELEMENT title (#PCDATA)>
+
+<!ELEMENT cuisineTypes (cuisineType+)>
+
+<!ELEMENT cuisineType (#PCDATA)>
+<!ATTLIST cuisineType value (Italian|Asian|French|Mexican|Mediterranean|Indian|American|Japanese) #REQUIRED>
+
+<!ELEMENT difficulty (#PCDATA)>
+<!ATTLIST difficulty level (Beginner|Intermediate|Advanced) "Beginner">
