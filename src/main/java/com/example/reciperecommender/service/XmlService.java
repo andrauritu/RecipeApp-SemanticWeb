@@ -146,6 +146,35 @@ public class XmlService {
         }
     }
 
+    public List<Recipe> getRecipesByCuisineType(String cuisineType) {
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            String expression = String.format(
+                    "/recipes/recipe[cuisineTypes/cuisineType='%s']", cuisineType);
+            NodeList nodes = (NodeList) xpath.evaluate(
+                    expression, recipesDocument, XPathConstants.NODESET);
+
+            List<Recipe> recipes = new ArrayList<>();
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Element recipeEl = (Element) nodes.item(i);
+                String id = recipeEl.getAttribute("id");
+                String title = recipeEl.getElementsByTagName("title").item(0).getTextContent().trim();
+
+                List<String> cuisineTypes = new ArrayList<>();
+                NodeList cuisineNodes = recipeEl.getElementsByTagName("cuisineType");
+                for (int j = 0; j < cuisineNodes.getLength(); j++) {
+                    cuisineTypes.add(cuisineNodes.item(j).getTextContent().trim());
+                }
+
+                String difficulty = recipeEl.getElementsByTagName("difficulty").item(0).getTextContent().trim();
+                recipes.add(new Recipe(id, title, cuisineTypes, difficulty));
+            }
+            return recipes;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to query recipes by cuisine type: " + cuisineType, e);
+        }
+    }
+
     public Recipe getRecipeById(String id) {
         try {
             XPath xpath = XPathFactory.newInstance().newXPath();

@@ -47,6 +47,27 @@ public class RecipeController {
         return "recipe-detail";
     }
 
+    @GetMapping("/recipes/filter")
+    public String filterRecipes(
+            @RequestParam(defaultValue = "") String cuisine,
+            Model model,
+            RedirectAttributes redirectAttributes) {
+
+        // Reject unknown cuisine values to prevent XPath injection
+        if (!cuisine.isEmpty() && !RecipeConstants.CUISINE_TYPES.contains(cuisine)) {
+            return "redirect:/recipes/filter";
+        }
+
+        List<Recipe> recipes = cuisine.isEmpty()
+                ? xmlService.getAllRecipes()
+                : xmlService.getRecipesByCuisineType(cuisine);
+
+        model.addAttribute("recipes", recipes);
+        model.addAttribute("cuisineTypes", RecipeConstants.CUISINE_TYPES);
+        model.addAttribute("selectedCuisine", cuisine);
+        return "filter-recipes";
+    }
+
     @GetMapping("/recipes/add")
     public String showAddRecipeForm(Model model) {
         model.addAttribute("cuisineTypes", RecipeConstants.CUISINE_TYPES);
