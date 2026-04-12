@@ -17,6 +17,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.StringWriter;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -265,6 +267,21 @@ public class XmlService {
 
         // Keep in-memory document in sync
         reloadUsers();
+    }
+
+    public String transformRecipesWithXsl(String userSkillLevel) {
+        try {
+            File xslFile = new File(xmlDataPath, "recipes.xsl");
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer(new StreamSource(xslFile));
+            transformer.setParameter("userSkill", userSkillLevel);
+
+            StringWriter writer = new StringWriter();
+            transformer.transform(new DOMSource(recipesDocument), new StreamResult(writer));
+            return writer.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to apply XSL transformation", e);
+        }
     }
 
     private void writeDocument(Document document, File outputFile, String dtdFilename) {
