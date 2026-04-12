@@ -8,6 +8,7 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
@@ -16,16 +17,16 @@
 <div class="container mt-4">
     <h1 class="mb-4">Filter Recipes by Cuisine Type</h1>
 
-    <!-- Cuisine filter buttons -->
+    <!-- Cuisine filter buttons (btn-lg) -->
     <div class="d-flex flex-wrap gap-2 mb-4">
         <a th:href="@{/recipes/filter}"
-           th:class="${selectedCuisine == ''} ? 'btn btn-primary' : 'btn btn-outline-primary'">
+           th:class="${selectedCuisine == ''} ? 'btn btn-lg btn-primary' : 'btn btn-lg btn-outline-primary'">
             All
         </a>
         <a th:each="ct : ${cuisineTypes}"
            th:href="@{/recipes/filter(cuisine=${ct})}"
            th:text="${ct}"
-           th:class="${ct == selectedCuisine} ? 'btn btn-primary' : 'btn btn-outline-primary'">
+           th:class="${ct == selectedCuisine} ? 'btn btn-lg btn-primary' : 'btn btn-lg btn-outline-primary'">
         </a>
     </div>
 
@@ -45,35 +46,33 @@
          th:text="'No recipes found for ' + ${selectedCuisine} + ' cuisine.'">
     </div>
 
-    <!-- Results table -->
-    <table th:if="${!#lists.isEmpty(recipes)}"
-           class="table table-striped table-hover align-middle">
-        <thead class="table-dark">
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Cuisine Types</th>
-            <th scope="col">Difficulty</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="recipe : ${recipes}">
-            <td th:text="${recipe.title}"></td>
-            <td th:text="${#strings.listJoin(recipe.cuisineTypes, ', ')}"></td>
-            <td>
-                <span th:text="${recipe.difficulty}"
-                      th:class="${recipe.difficulty == 'Beginner'} ? 'badge bg-success' : (${recipe.difficulty == 'Intermediate'} ? 'badge bg-warning text-dark' : 'badge bg-danger')">
-                </span>
-            </td>
-            <td>
-                <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-sm btn-outline-primary">
-                    View Details
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <!-- Cards grid -->
+    <div th:if="${!#lists.isEmpty(recipes)}" class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+        <div th:each="recipe : ${recipes}" class="col">
+            <div class="card h-100 recipe-card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${recipe.title}"></h5>
+                    <div class="mb-2">
+                        <span th:each="ct : ${recipe.cuisineTypes}"
+                              class="badge bg-secondary badge-cuisine me-1"
+                              th:text="${ct}">
+                        </span>
+                    </div>
+                    <span th:text="${recipe.difficulty}"
+                          th:class="${recipe.difficulty == 'Beginner'} ? 'badge bg-success' : (${recipe.difficulty == 'Intermediate'} ? 'badge bg-warning text-dark' : 'badge bg-danger')">
+                    </span>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-3">
+                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-sm btn-primary w-100">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div th:replace="~{fragments/navbar :: footer}"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmF+sCFBJfYXdKRZo2u4cJfQNqor"

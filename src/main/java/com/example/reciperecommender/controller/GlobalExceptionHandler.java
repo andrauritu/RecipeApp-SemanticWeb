@@ -18,6 +18,7 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorMessage", ex.getMessage());
         model.addAttribute("errorType", ex.getClass().getSimpleName());
         model.addAttribute("requestUri", request.getRequestURI());
+        model.addAttribute("activePage", "");
         return "error";
     }
 }

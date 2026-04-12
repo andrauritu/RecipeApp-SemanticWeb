@@ -8,6 +8,7 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
@@ -17,12 +18,17 @@
     <h1 class="mb-4">Recipe Recommendations</h1>
 
     <!-- User profile card -->
-    <div class="card mb-4">
+    <div class="card mb-4 bg-info bg-opacity-10 border border-info">
         <div class="card-body">
-            <h5 class="card-title"
-                th:text="'Recommending for: ' + ${user.name} + ' ' + ${user.surname}">
-            </h5>
-            <div class="row mt-2">
+            <div class="d-flex align-items-center mb-3">
+                <div class="avatar-circle me-3"
+                     th:text="${#strings.substring(user.name,0,1) + #strings.substring(user.surname,0,1)}">
+                </div>
+                <h5 class="mb-0"
+                    th:text="'Recommending for: ' + ${user.name} + ' ' + ${user.surname}">
+                </h5>
+            </div>
+            <div class="row">
                 <div class="col-sm-6">
                     <span class="text-muted">Cooking Skill Level:</span>
                     <span class="ms-2 fw-semibold" th:text="${user.cookingSkillLevel}"></span>
@@ -35,8 +41,8 @@
         </div>
     </div>
 
-    <!-- Tab buttons -->
-    <ul class="nav nav-tabs mb-3">
+    <!-- Pills tabs -->
+    <ul class="nav nav-pills mb-4">
         <li class="nav-item">
             <a th:href="@{/recommendations}"
                th:class="${matchType == 'skill'} ? 'nav-link active' : 'nav-link'">
@@ -70,28 +76,33 @@
             </span>
         </p>
 
-        <table class="table table-striped table-hover align-middle">
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Cuisine Types</th>
-                <th scope="col">Difficulty</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="recipe : ${recipes}">
-                <td th:text="${recipe.title}"></td>
-                <td th:text="${#strings.listJoin(recipe.cuisineTypes, ', ')}"></td>
-                <td>
-                    <span th:text="${recipe.difficulty}"
-                          th:class="${recipe.difficulty == 'Beginner'} ? 'badge bg-success' : (${recipe.difficulty == 'Intermediate'} ? 'badge bg-warning text-dark' : 'badge bg-danger')">
-                    </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+            <div th:each="recipe : ${recipes}" class="col">
+                <div class="card h-100 recipe-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${recipe.title}"></h5>
+                        <div class="mb-2">
+                            <span th:each="ct : ${recipe.cuisineTypes}"
+                                  class="badge bg-secondary badge-cuisine me-1"
+                                  th:text="${ct}">
+                            </span>
+                        </div>
+                        <span th:text="${recipe.difficulty}"
+                              th:class="${recipe.difficulty == 'Beginner'} ? 'badge bg-success' : (${recipe.difficulty == 'Intermediate'} ? 'badge bg-warning text-dark' : 'badge bg-danger')">
+                        </span>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-sm btn-primary w-100">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<div th:replace="~{fragments/navbar :: footer}"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmF+sCFBJfYXdKRZo2u4cJfQNqor"

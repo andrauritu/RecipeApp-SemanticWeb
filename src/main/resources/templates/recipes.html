@@ -8,55 +8,66 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div class="container mt-4">
-    <h1 class="mb-3">All Recipes</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>All Recipes</h1>
+        <a th:href="@{/recipes/add}" class="btn btn-primary">Add Recipe</a>
+    </div>
 
     <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
         <span th:text="${errorMessage}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
     <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
         <span th:text="${successMessage}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
+    <!-- Quick cuisine filter shortcuts -->
+    <div class="d-flex flex-wrap gap-2 mb-3">
+        <span class="text-muted align-self-center me-1">Quick filter:</span>
+        <a th:each="ct : ${cuisineTypes}"
+           th:href="@{/recipes/filter(cuisine=${ct})}"
+           th:text="${ct}"
+           class="btn btn-sm btn-outline-secondary">
+        </a>
+    </div>
+
     <p class="text-muted" th:text="'Showing ' + ${#lists.size(recipes)} + ' recipes'"></p>
 
-    <table class="table table-striped table-hover align-middle">
-        <thead class="table-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Cuisine Types</th>
-            <th scope="col">Difficulty</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="recipe : ${recipes}">
-            <td th:text="${recipe.id}"></td>
-            <td th:text="${recipe.title}"></td>
-            <td th:text="${#strings.listJoin(recipe.cuisineTypes, ', ')}"></td>
-            <td>
-                <span th:text="${recipe.difficulty}"
-                      th:class="${recipe.difficulty == 'Beginner'} ? 'badge bg-success' : (${recipe.difficulty == 'Intermediate'} ? 'badge bg-warning text-dark' : 'badge bg-danger')">
-                </span>
-            </td>
-            <td>
-                <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-sm btn-outline-primary">
-                    View Details
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <!-- Cards grid -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+        <div th:each="recipe : ${recipes}" class="col">
+            <div class="card h-100 recipe-card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${recipe.title}"></h5>
+                    <div class="mb-2">
+                        <span th:each="ct : ${recipe.cuisineTypes}"
+                              class="badge bg-secondary badge-cuisine me-1"
+                              th:text="${ct}">
+                        </span>
+                    </div>
+                    <span th:text="${recipe.difficulty}"
+                          th:class="${recipe.difficulty == 'Beginner'} ? 'badge bg-success' : (${recipe.difficulty == 'Intermediate'} ? 'badge bg-warning text-dark' : 'badge bg-danger')">
+                    </span>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-3">
+                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-sm btn-primary w-100">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div th:replace="~{fragments/navbar :: footer}"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmF+sCFBJfYXdKRZo2u4cJfQNqor"

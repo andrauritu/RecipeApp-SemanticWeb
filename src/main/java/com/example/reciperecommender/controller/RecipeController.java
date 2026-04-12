@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class RecipeController {
@@ -24,14 +25,19 @@ public class RecipeController {
     }
 
     @GetMapping("/")
-    public String home() {
-        return "redirect:/recipes";
+    public String home(Model model) {
+        model.addAttribute("recipeCount", xmlService.getAllRecipes().size());
+        model.addAttribute("userCount", xmlService.getAllUsers().size());
+        model.addAttribute("cuisineCount", RecipeConstants.CUISINE_TYPES.size());
+        model.addAttribute("activePage", "home");
+        return "home";
     }
 
     @GetMapping("/recipes")
     public String listRecipes(Model model) {
         model.addAttribute("recipes", xmlService.getAllRecipes());
-        model.addAttribute("users", xmlService.getAllUsers());
+        model.addAttribute("cuisineTypes", RecipeConstants.CUISINE_TYPES);
+        model.addAttribute("activePage", "recipes");
         return "recipes";
     }
 
@@ -43,17 +49,22 @@ public class RecipeController {
             redirectAttributes.addFlashAttribute("errorMessage", "Recipe not found.");
             return "redirect:/recipes";
         }
+        List<Recipe> similarRecipes = xmlService.getRecipesBySkillLevel(recipe.getDifficulty())
+                .stream()
+                .filter(r -> !r.getId().equals(id))
+                .limit(3)
+                .collect(Collectors.toList());
         model.addAttribute("recipe", recipe);
+        model.addAttribute("similarRecipes", similarRecipes);
+        model.addAttribute("activePage", "recipes");
         return "recipe-detail";
     }
 
     @GetMapping("/recipes/filter")
     public String filterRecipes(
             @RequestParam(defaultValue = "") String cuisine,
-            Model model,
-            RedirectAttributes redirectAttributes) {
+            Model model) {
 
-        // Reject unknown cuisine values to prevent XPath injection
         if (!cuisine.isEmpty() && !RecipeConstants.CUISINE_TYPES.contains(cuisine)) {
             return "redirect:/recipes/filter";
         }
@@ -65,6 +76,7 @@ public class RecipeController {
         model.addAttribute("recipes", recipes);
         model.addAttribute("cuisineTypes", RecipeConstants.CUISINE_TYPES);
         model.addAttribute("selectedCuisine", cuisine);
+        model.addAttribute("activePage", "filter");
         return "filter-recipes";
     }
 
@@ -76,6 +88,7 @@ public class RecipeController {
         model.addAttribute("inputCuisineType1", "");
         model.addAttribute("inputCuisineType2", "");
         model.addAttribute("inputDifficulty", "");
+        model.addAttribute("activePage", "add-recipe");
         return "add-recipe";
     }
 
@@ -126,6 +139,7 @@ public class RecipeController {
             model.addAttribute("inputCuisineType1", cuisineType1);
             model.addAttribute("inputCuisineType2", cuisineType2);
             model.addAttribute("inputDifficulty", difficulty);
+            model.addAttribute("activePage", "add-recipe");
             return "add-recipe";
         }
 

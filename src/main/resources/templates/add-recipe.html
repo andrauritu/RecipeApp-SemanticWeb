@@ -8,73 +8,85 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div class="container mt-4" style="max-width: 640px;">
-    <h1 class="mb-4">Add New Recipe</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
 
-    <form th:action="@{/recipes/add}" method="post" novalidate>
+            <h1 class="mb-4">Add New Recipe</h1>
 
-        <!-- Title -->
-        <div class="mb-3">
-            <label for="title" class="form-label fw-semibold">Title</label>
-            <input type="text" id="title" name="title"
-                   th:class="${titleError != null} ? 'form-control is-invalid' : 'form-control'"
-                   th:value="${inputTitle}" placeholder="Enter recipe title">
-            <div th:if="${titleError != null}" class="text-danger small mt-1" th:text="${titleError}"></div>
+            <div class="card border-0 shadow-sm form-card">
+                <div class="card-body p-4">
+                    <form th:action="@{/recipes/add}" method="post" novalidate>
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-semibold">Title</label>
+                            <input type="text" id="title" name="title"
+                                   th:class="${titleError != null} ? 'form-control is-invalid' : 'form-control'"
+                                   th:value="${inputTitle}" placeholder="Enter recipe title">
+                            <div th:if="${titleError != null}" class="text-danger small mt-1" th:text="${titleError}"></div>
+                        </div>
+
+                        <!-- First Cuisine Type -->
+                        <div class="mb-3">
+                            <label for="cuisineType1" class="form-label fw-semibold">First Cuisine Type</label>
+                            <select id="cuisineType1" name="cuisineType1"
+                                    th:class="${cuisineError != null} ? 'form-select is-invalid' : 'form-select'">
+                                <option value="">-- Select cuisine type --</option>
+                                <option th:each="ct : ${cuisineTypes}"
+                                        th:value="${ct}" th:text="${ct}"
+                                        th:selected="${ct == inputCuisineType1}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Second Cuisine Type -->
+                        <div class="mb-3">
+                            <label for="cuisineType2" class="form-label fw-semibold">Second Cuisine Type</label>
+                            <select id="cuisineType2" name="cuisineType2"
+                                    th:class="${cuisineError != null} ? 'form-select is-invalid' : 'form-select'">
+                                <option value="">-- Select cuisine type --</option>
+                                <option th:each="ct : ${cuisineTypes}"
+                                        th:value="${ct}" th:text="${ct}"
+                                        th:selected="${ct == inputCuisineType2}">
+                                </option>
+                            </select>
+                            <div th:if="${cuisineError != null}" class="text-danger small mt-1" th:text="${cuisineError}"></div>
+                        </div>
+
+                        <!-- Difficulty -->
+                        <div class="mb-4">
+                            <label for="difficulty" class="form-label fw-semibold">Difficulty</label>
+                            <select id="difficulty" name="difficulty"
+                                    th:class="${difficultyError != null} ? 'form-select is-invalid' : 'form-select'">
+                                <option value="">-- Select difficulty --</option>
+                                <option th:each="level : ${difficultyLevels}"
+                                        th:value="${level}" th:text="${level}"
+                                        th:selected="${level == inputDifficulty}">
+                                </option>
+                            </select>
+                            <div th:if="${difficultyError != null}" class="text-danger small mt-1" th:text="${difficultyError}"></div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Add Recipe</button>
+                            <a th:href="@{/recipes}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
-
-        <!-- First Cuisine Type -->
-        <div class="mb-3">
-            <label for="cuisineType1" class="form-label fw-semibold">First Cuisine Type</label>
-            <select id="cuisineType1" name="cuisineType1"
-                    th:class="${cuisineError != null} ? 'form-select is-invalid' : 'form-select'">
-                <option value="">-- Select cuisine type --</option>
-                <option th:each="ct : ${cuisineTypes}"
-                        th:value="${ct}"
-                        th:text="${ct}"
-                        th:selected="${ct == inputCuisineType1}">
-                </option>
-            </select>
-        </div>
-
-        <!-- Second Cuisine Type -->
-        <div class="mb-3">
-            <label for="cuisineType2" class="form-label fw-semibold">Second Cuisine Type</label>
-            <select id="cuisineType2" name="cuisineType2"
-                    th:class="${cuisineError != null} ? 'form-select is-invalid' : 'form-select'">
-                <option value="">-- Select cuisine type --</option>
-                <option th:each="ct : ${cuisineTypes}"
-                        th:value="${ct}"
-                        th:text="${ct}"
-                        th:selected="${ct == inputCuisineType2}">
-                </option>
-            </select>
-            <div th:if="${cuisineError != null}" class="text-danger small mt-1" th:text="${cuisineError}"></div>
-        </div>
-
-        <!-- Difficulty -->
-        <div class="mb-4">
-            <label for="difficulty" class="form-label fw-semibold">Difficulty</label>
-            <select id="difficulty" name="difficulty"
-                    th:class="${difficultyError != null} ? 'form-select is-invalid' : 'form-select'">
-                <option value="">-- Select difficulty --</option>
-                <option th:each="level : ${difficultyLevels}"
-                        th:value="${level}"
-                        th:text="${level}"
-                        th:selected="${level == inputDifficulty}">
-                </option>
-            </select>
-            <div th:if="${difficultyError != null}" class="text-danger small mt-1" th:text="${difficultyError}"></div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add Recipe</button>
-        <a th:href="@{/recipes}" class="btn btn-outline-secondary ms-2">Cancel</a>
-    </form>
+    </div>
 </div>
+
+<div th:replace="~{fragments/navbar :: footer}"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmF+sCFBJfYXdKRZo2u4cJfQNqor"

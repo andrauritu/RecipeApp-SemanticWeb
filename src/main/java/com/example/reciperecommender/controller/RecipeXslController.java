@@ -25,7 +25,6 @@ public class RecipeXslController {
 
         List<User> users = xmlService.getAllUsers();
 
-        // Select the user matching the requested id, falling back to the first user
         User selectedUser = users.stream()
                 .filter(u -> u.getId().equals(userId))
                 .findFirst()
@@ -38,6 +37,7 @@ public class RecipeXslController {
         model.addAttribute("selectedUser", selectedUser);
         model.addAttribute("selectedUserId", selectedUser != null ? selectedUser.getId() : "");
         model.addAttribute("transformedHtml", transformedHtml);
+        model.addAttribute("activePage", "styled");
         return "styled-recipes";
     }
 }

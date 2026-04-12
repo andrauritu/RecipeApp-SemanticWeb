@@ -25,6 +25,7 @@ public class RecommendationController {
         model.addAttribute("user", user);
         model.addAttribute("recipes", recipes);
         model.addAttribute("matchType", "skill");
+        model.addAttribute("activePage", "recommendations");
         return "recommendations";
     }
 
@@ -36,6 +37,7 @@ public class RecommendationController {
         model.addAttribute("user", user);
         model.addAttribute("recipes", recipes);
         model.addAttribute("matchType", "advanced");
+        model.addAttribute("activePage", "recommendations");
         return "recommendations";
     }
 }

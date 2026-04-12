@@ -1,0 +1,79 @@
+/* ── Navbar ─────────────────────────────────────────── */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+}
+
+/* ── Card hover effect ──────────────────────────────── */
+.recipe-card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.recipe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.13) !important;
+}
+
+/* ── Cuisine badges ─────────────────────────────────── */
+.badge-cuisine {
+    padding: 0.42em 0.7em;
+    font-size: 0.8rem;
+}
+
+/* ── Difficulty text helpers ────────────────────────── */
+.difficulty-beginner    { color: #198754; font-weight: 600; }
+.difficulty-intermediate { color: #fd7e14; font-weight: 600; }
+.difficulty-advanced    { color: #dc3545; font-weight: 600; }
+
+/* ── Legend colour box (styled view) ───────────────── */
+.legend-box {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.15);
+    vertical-align: middle;
+}
+
+/* ── Avatar circle (users page) ─────────────────────── */
+.avatar-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* ── Form card accent border ────────────────────────── */
+.form-card {
+    border-left: 4px solid #0d6efd !important;
+}
+
+/* ── Hero section ───────────────────────────────────── */
+.hero-section {
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+}
+
+/* ── Stat card number ───────────────────────────────── */
+.stat-number {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ── Site footer ────────────────────────────────────── */
+.site-footer {
+    margin-top: 3rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+}

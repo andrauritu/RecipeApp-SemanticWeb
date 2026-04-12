@@ -25,6 +25,7 @@ public class UserController {
     @GetMapping("/users")
     public String listUsers(Model model) {
         model.addAttribute("users", xmlService.getAllUsers());
+        model.addAttribute("activePage", "users");
         return "users";
     }
 
@@ -36,6 +37,7 @@ public class UserController {
         model.addAttribute("inputSurname", "");
         model.addAttribute("inputSkillLevel", "");
         model.addAttribute("inputCuisineType", "");
+        model.addAttribute("activePage", "add-user");
         return "add-user";
     }
 
@@ -53,7 +55,6 @@ public class UserController {
         String skillLevelError = null;
         String cuisineTypeError = null;
 
-        // Validate name
         String trimmedName = name.trim();
         if (trimmedName.isEmpty()) {
             nameError = "Name is required.";
@@ -63,7 +64,6 @@ public class UserController {
             nameError = "Name may only contain letters and spaces.";
         }
 
-        // Validate surname
         String trimmedSurname = surname.trim();
         if (trimmedSurname.isEmpty()) {
             surnameError = "Surname is required.";
@@ -73,14 +73,12 @@ public class UserController {
             surnameError = "Surname may only contain letters and spaces.";
         }
 
-        // Validate skill level
         if (skillLevel.isEmpty()) {
             skillLevelError = "Cooking skill level is required.";
         } else if (!RecipeConstants.SKILL_LEVELS.contains(skillLevel)) {
             skillLevelError = "Invalid cooking skill level selected.";
         }
 
-        // Validate cuisine type
         if (cuisineType.isEmpty()) {
             cuisineTypeError = "Preferred cuisine type is required.";
         } else if (!RecipeConstants.CUISINE_TYPES.contains(cuisineType)) {
@@ -101,6 +99,7 @@ public class UserController {
             model.addAttribute("inputSurname", surname);
             model.addAttribute("inputSkillLevel", skillLevel);
             model.addAttribute("inputCuisineType", cuisineType);
+            model.addAttribute("activePage", "add-user");
             return "add-user";
         }
 
