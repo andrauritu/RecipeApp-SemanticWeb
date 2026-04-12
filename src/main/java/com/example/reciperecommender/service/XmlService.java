@@ -146,6 +146,30 @@ public class XmlService {
         }
     }
 
+    public Recipe getRecipeById(String id) {
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            String expression = String.format("/recipes/recipe[@id='%s']", id);
+            Element recipeEl = (Element) xpath.evaluate(
+                    expression, recipesDocument, XPathConstants.NODE);
+            if (recipeEl == null) {
+                return null;
+            }
+            String title = recipeEl.getElementsByTagName("title").item(0).getTextContent().trim();
+
+            List<String> cuisineTypes = new ArrayList<>();
+            NodeList cuisineNodes = recipeEl.getElementsByTagName("cuisineType");
+            for (int j = 0; j < cuisineNodes.getLength(); j++) {
+                cuisineTypes.add(cuisineNodes.item(j).getTextContent().trim());
+            }
+
+            String difficulty = recipeEl.getElementsByTagName("difficulty").item(0).getTextContent().trim();
+            return new Recipe(id, title, cuisineTypes, difficulty);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get recipe by id: " + id, e);
+        }
+    }
+
     public List<Recipe> getRecipesBySkillLevelAndCuisine(String skillLevel, String cuisineType) {
         try {
             XPath xpath = XPathFactory.newInstance().newXPath();

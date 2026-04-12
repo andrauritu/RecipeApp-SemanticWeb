@@ -6,6 +6,7 @@ import com.example.reciperecommender.service.XmlService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,11 +35,22 @@ public class RecipeController {
         return "recipes";
     }
 
+    @GetMapping("/recipes/{id}")
+    public String recipeDetail(@PathVariable String id, Model model,
+                               RedirectAttributes redirectAttributes) {
+        Recipe recipe = xmlService.getRecipeById(id);
+        if (recipe == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Recipe not found.");
+            return "redirect:/recipes";
+        }
+        model.addAttribute("recipe", recipe);
+        return "recipe-detail";
+    }
+
     @GetMapping("/recipes/add")
     public String showAddRecipeForm(Model model) {
         model.addAttribute("cuisineTypes", RecipeConstants.CUISINE_TYPES);
         model.addAttribute("difficultyLevels", RecipeConstants.DIFFICULTY_LEVELS);
-        // Pre-populate empty values so the template never needs to handle null
         model.addAttribute("inputTitle", "");
         model.addAttribute("inputCuisineType1", "");
         model.addAttribute("inputCuisineType2", "");
@@ -59,7 +71,6 @@ public class RecipeController {
         String cuisineError = null;
         String difficultyError = null;
 
-        // Validate title
         String trimmedTitle = title.trim();
         if (trimmedTitle.isEmpty()) {
             titleError = "Title is required.";
@@ -67,7 +78,6 @@ public class RecipeController {
             titleError = "Title must be between 2 and 100 characters.";
         }
 
-        // Validate cuisine types
         if (cuisineType1.isEmpty() || cuisineType2.isEmpty()) {
             cuisineError = "Both cuisine types must be selected.";
         } else if (cuisineType1.equals(cuisineType2)) {
@@ -77,7 +87,6 @@ public class RecipeController {
             cuisineError = "Invalid cuisine type selected.";
         }
 
-        // Validate difficulty
         if (difficulty.isEmpty()) {
             difficultyError = "Difficulty is required.";
         } else if (!RecipeConstants.DIFFICULTY_LEVELS.contains(difficulty)) {
