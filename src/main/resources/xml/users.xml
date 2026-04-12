@@ -4,7 +4,7 @@
   <user id="1">
     <name>John</name>
     <surname>Doe</surname>
-    <cookingSkillLevel value="Beginner">Beginner</cookingSkillLevel>
+    <cookingSkillLevel value="Advanced">Advanced</cookingSkillLevel>
     <preferredCuisineType value="Italian">Italian</preferredCuisineType>
   </user>
 </users>

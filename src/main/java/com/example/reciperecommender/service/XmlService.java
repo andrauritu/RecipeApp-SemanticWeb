@@ -17,6 +17,9 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +95,53 @@ public class XmlService {
             users.add(new User(id, name, surname, cookingSkillLevel, preferredCuisineType));
         }
         return users;
+    }
+
+    public User getFirstUser() {
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            Element userEl = (Element) xpath.evaluate(
+                    "/users/user[1]", usersDocument, XPathConstants.NODE);
+            if (userEl == null) {
+                return null;
+            }
+            String id = userEl.getAttribute("id");
+            String name = userEl.getElementsByTagName("name").item(0).getTextContent().trim();
+            String surname = userEl.getElementsByTagName("surname").item(0).getTextContent().trim();
+            String cookingSkillLevel = userEl.getElementsByTagName("cookingSkillLevel").item(0).getTextContent().trim();
+            String preferredCuisineType = userEl.getElementsByTagName("preferredCuisineType").item(0).getTextContent().trim();
+            return new User(id, name, surname, cookingSkillLevel, preferredCuisineType);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get first user via XPath", e);
+        }
+    }
+
+    public List<Recipe> getRecipesBySkillLevel(String skillLevel) {
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            String expression = String.format("/recipes/recipe[difficulty='%s']", skillLevel);
+            NodeList nodes = (NodeList) xpath.evaluate(
+                    expression, recipesDocument, XPathConstants.NODESET);
+
+            List<Recipe> recipes = new ArrayList<>();
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Element recipeEl = (Element) nodes.item(i);
+                String id = recipeEl.getAttribute("id");
+                String title = recipeEl.getElementsByTagName("title").item(0).getTextContent().trim();
+
+                List<String> cuisineTypes = new ArrayList<>();
+                NodeList cuisineNodes = recipeEl.getElementsByTagName("cuisineType");
+                for (int j = 0; j < cuisineNodes.getLength(); j++) {
+                    cuisineTypes.add(cuisineNodes.item(j).getTextContent().trim());
+                }
+
+                String difficulty = recipeEl.getElementsByTagName("difficulty").item(0).getTextContent().trim();
+                recipes.add(new Recipe(id, title, cuisineTypes, difficulty));
+            }
+            return recipes;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to query recipes by skill level: " + skillLevel, e);
+        }
     }
 
     public void addRecipe(Recipe recipe) {
