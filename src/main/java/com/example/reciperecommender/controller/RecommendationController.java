@@ -27,4 +27,15 @@ public class RecommendationController {
         model.addAttribute("matchType", "skill");
         return "recommendations";
     }
+
+    @GetMapping("/recommendations/advanced")
+    public String advancedRecommendations(Model model) {
+        User user = xmlService.getFirstUser();
+        List<Recipe> recipes = xmlService.getRecipesBySkillLevelAndCuisine(
+                user.getCookingSkillLevel(), user.getPreferredCuisineType());
+        model.addAttribute("user", user);
+        model.addAttribute("recipes", recipes);
+        model.addAttribute("matchType", "advanced");
+        return "recommendations";
+    }
 }

@@ -144,6 +144,37 @@ public class XmlService {
         }
     }
 
+    public List<Recipe> getRecipesBySkillLevelAndCuisine(String skillLevel, String cuisineType) {
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            String expression = String.format(
+                    "/recipes/recipe[difficulty='%s' and cuisineTypes/cuisineType='%s']",
+                    skillLevel, cuisineType);
+            NodeList nodes = (NodeList) xpath.evaluate(
+                    expression, recipesDocument, XPathConstants.NODESET);
+
+            List<Recipe> recipes = new ArrayList<>();
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Element recipeEl = (Element) nodes.item(i);
+                String id = recipeEl.getAttribute("id");
+                String title = recipeEl.getElementsByTagName("title").item(0).getTextContent().trim();
+
+                List<String> cuisineTypes = new ArrayList<>();
+                NodeList cuisineNodes = recipeEl.getElementsByTagName("cuisineType");
+                for (int j = 0; j < cuisineNodes.getLength(); j++) {
+                    cuisineTypes.add(cuisineNodes.item(j).getTextContent().trim());
+                }
+
+                String difficulty = recipeEl.getElementsByTagName("difficulty").item(0).getTextContent().trim();
+                recipes.add(new Recipe(id, title, cuisineTypes, difficulty));
+            }
+            return recipes;
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Failed to query recipes by skill level and cuisine: " + skillLevel + ", " + cuisineType, e);
+        }
+    }
+
     public void addRecipe(Recipe recipe) {
         // Generate new id = max existing id + 1
         NodeList recipeNodes = recipesDocument.getElementsByTagName("recipe");
