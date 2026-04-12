@@ -13,5 +13,9 @@ public class RecipeConstants {
             "Beginner", "Intermediate", "Advanced"
     );
 
+    public static final List<String> SKILL_LEVELS = List.of(
+            "Beginner", "Intermediate", "Advanced"
+    );
+
     private RecipeConstants() {}
 }

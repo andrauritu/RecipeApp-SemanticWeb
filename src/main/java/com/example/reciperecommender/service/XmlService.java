@@ -140,6 +140,52 @@ public class XmlService {
         reloadRecipes();
     }
 
+    public void addUser(User user) {
+        // Generate new id = max existing id + 1
+        NodeList userNodes = usersDocument.getElementsByTagName("user");
+        int maxId = 0;
+        for (int i = 0; i < userNodes.getLength(); i++) {
+            Element el = (Element) userNodes.item(i);
+            try {
+                int id = Integer.parseInt(el.getAttribute("id"));
+                if (id > maxId) maxId = id;
+            } catch (NumberFormatException ignored) {}
+        }
+        String newId = String.valueOf(maxId + 1);
+        user.setId(newId);
+
+        // Build new <user> DOM element
+        Element userEl = usersDocument.createElement("user");
+        userEl.setAttribute("id", newId);
+
+        Element nameEl = usersDocument.createElement("name");
+        nameEl.setTextContent(user.getName());
+        userEl.appendChild(nameEl);
+
+        Element surnameEl = usersDocument.createElement("surname");
+        surnameEl.setTextContent(user.getSurname());
+        userEl.appendChild(surnameEl);
+
+        Element skillEl = usersDocument.createElement("cookingSkillLevel");
+        skillEl.setAttribute("value", user.getCookingSkillLevel());
+        skillEl.setTextContent(user.getCookingSkillLevel());
+        userEl.appendChild(skillEl);
+
+        Element cuisineEl = usersDocument.createElement("preferredCuisineType");
+        cuisineEl.setAttribute("value", user.getPreferredCuisineType());
+        cuisineEl.setTextContent(user.getPreferredCuisineType());
+        userEl.appendChild(cuisineEl);
+
+        // Append to root <users> element
+        usersDocument.getDocumentElement().appendChild(userEl);
+
+        // Write updated document back to disk
+        writeDocument(usersDocument, new File(xmlDataPath, "users.xml"), "users.dtd");
+
+        // Keep in-memory document in sync
+        reloadUsers();
+    }
+
     private void writeDocument(Document document, File outputFile, String dtdFilename) {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
