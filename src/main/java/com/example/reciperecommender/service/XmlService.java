@@ -12,6 +12,11 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +49,6 @@ public class XmlService {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setValidating(false);
-            // Prevent loading external DTD so the parser doesn't fail on relative DOCTYPE paths
             factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
             DocumentBuilder builder = factory.newDocumentBuilder();
             return builder.parse(file);
@@ -88,5 +92,68 @@ public class XmlService {
             users.add(new User(id, name, surname, cookingSkillLevel, preferredCuisineType));
         }
         return users;
+    }
+
+    public void addRecipe(Recipe recipe) {
+        // Generate new id = max existing id + 1
+        NodeList recipeNodes = recipesDocument.getElementsByTagName("recipe");
+        int maxId = 0;
+        for (int i = 0; i < recipeNodes.getLength(); i++) {
+            Element el = (Element) recipeNodes.item(i);
+            try {
+                int id = Integer.parseInt(el.getAttribute("id"));
+                if (id > maxId) maxId = id;
+            } catch (NumberFormatException ignored) {}
+        }
+        String newId = String.valueOf(maxId + 1);
+        recipe.setId(newId);
+
+        // Build new <recipe> DOM element
+        Element recipeEl = recipesDocument.createElement("recipe");
+        recipeEl.setAttribute("id", newId);
+
+        Element titleEl = recipesDocument.createElement("title");
+        titleEl.setTextContent(recipe.getTitle());
+        recipeEl.appendChild(titleEl);
+
+        Element cuisineTypesEl = recipesDocument.createElement("cuisineTypes");
+        for (String ct : recipe.getCuisineTypes()) {
+            Element cuisineTypeEl = recipesDocument.createElement("cuisineType");
+            cuisineTypeEl.setAttribute("value", ct);
+            cuisineTypeEl.setTextContent(ct);
+            cuisineTypesEl.appendChild(cuisineTypeEl);
+        }
+        recipeEl.appendChild(cuisineTypesEl);
+
+        Element difficultyEl = recipesDocument.createElement("difficulty");
+        difficultyEl.setAttribute("level", recipe.getDifficulty());
+        difficultyEl.setTextContent(recipe.getDifficulty());
+        recipeEl.appendChild(difficultyEl);
+
+        // Append to root <recipes> element
+        recipesDocument.getDocumentElement().appendChild(recipeEl);
+
+        // Write updated document back to disk
+        writeDocument(recipesDocument, new File(xmlDataPath, "recipes.xml"), "recipes.dtd");
+
+        // Keep in-memory document in sync
+        reloadRecipes();
+    }
+
+    private void writeDocument(Document document, File outputFile, String dtdFilename) {
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, dtdFilename);
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(outputFile);
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to write XML file: " + outputFile.getAbsolutePath(), e);
+        }
     }
 }
