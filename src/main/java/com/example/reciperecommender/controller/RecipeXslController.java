@@ -25,10 +25,13 @@ public class RecipeXslController {
 
         List<User> users = xmlService.getAllUsers();
 
-        User selectedUser = users.stream()
-                .filter(u -> u.getId().equals(userId))
-                .findFirst()
-                .orElse(users.isEmpty() ? null : users.get(0));
+        User selectedUser = null;
+        if (userId != null && !userId.isBlank()) {
+            selectedUser = xmlService.getUserById(userId);
+        }
+        if (selectedUser == null) {
+            selectedUser = xmlService.getFirstUser();
+        }
 
         String transformedHtml = xmlService.transformRecipesWithXsl(
                 selectedUser != null ? selectedUser.getCookingSkillLevel() : "");

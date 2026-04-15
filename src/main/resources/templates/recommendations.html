@@ -17,6 +17,28 @@
 <div class="container mt-4">
     <h1 class="mb-4">Recipe Recommendations</h1>
 
+    <!-- User selector -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="userSelect" class="col-form-label fw-semibold">Select User:</label>
+                </div>
+                <div class="col-sm-4">
+                    <select id="userSelect" class="form-select"
+                            th:data-advanced="${matchType == 'advanced'}"
+                            onchange="window.location.href=(this.dataset.advanced==='true'?'/recommendations/advanced':'/recommendations')+'?userId='+this.value">
+                        <option th:each="u : ${users}"
+                                th:value="${u.id}"
+                                th:text="${u.name + ' ' + u.surname}"
+                                th:selected="${u.id == selectedUserId}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- User profile card -->
     <div class="card mb-4 bg-info bg-opacity-10 border border-info">
         <div class="card-body">
@@ -44,13 +66,13 @@
     <!-- Pills tabs -->
     <ul class="nav nav-pills mb-4">
         <li class="nav-item">
-            <a th:href="@{/recommendations}"
+            <a th:href="@{/recommendations(userId=${selectedUserId})}"
                th:class="${matchType == 'skill'} ? 'nav-link active' : 'nav-link'">
                 By Skill Level
             </a>
         </li>
         <li class="nav-item">
-            <a th:href="@{/recommendations/advanced}"
+            <a th:href="@{/recommendations/advanced(userId=${selectedUserId})}"
                th:class="${matchType == 'advanced'} ? 'nav-link active' : 'nav-link'">
                 By Skill + Cuisine
             </a>

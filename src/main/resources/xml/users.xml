@@ -1,10 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE users SYSTEM "users.dtd">
 <users>
+        
+  
+  
   <user id="1">
+                
+    
+    
     <name>John</name>
+                
+    
+    
     <surname>Doe</surname>
+                
+    
+    
     <cookingSkillLevel value="Advanced">Advanced</cookingSkillLevel>
+                
+    
+    
+    <preferredCuisineType value="Italian">Italian</preferredCuisineType>
+              
+  
+  
+  </user>
+      
+  
+  
+  <user id="2">
+            
+    
+    <name>Uritu</name>
+            
+    
+    <surname>aaa</surname>
+            
+    
+    <cookingSkillLevel value="Beginner">Beginner</cookingSkillLevel>
+            
+    
+    <preferredCuisineType value="Italian">Italian</preferredCuisineType>
+          
+  
+  </user>
+    
+  
+  <user id="3">
+        
+    <name>aa</name>
+        
+    <surname>abb</surname>
+        
+    <cookingSkillLevel value="Advanced">Advanced</cookingSkillLevel>
+        
+    <preferredCuisineType value="Asian">Asian</preferredCuisineType>
+      
+  </user>
+  
+  <user id="4">
+    <name>test</name>
+    <surname>testt</surname>
+    <cookingSkillLevel value="Intermediate">Intermediate</cookingSkillLevel>
     <preferredCuisineType value="Italian">Italian</preferredCuisineType>
   </user>
 </users>

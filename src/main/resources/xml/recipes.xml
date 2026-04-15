@@ -13,11 +13,14 @@
       <cuisineType value="Italian">Italian</cuisineType>
           
     </cuisineTypes>
-        
-    <difficulty level="Beginner">Beginner</difficulty>
-      
-  </recipe>
+            
     
+    <difficulty level="Beginner">Beginner</difficulty>
+          
+  
+  </recipe>
+      
+  
   <recipe id="2">
         
     <title>Sausage, mustard &amp; apple hash</title>
@@ -51,13 +54,17 @@
   </recipe>
     
   <recipe id="4">
-        
+            
+    
     <title>Butternut squash &amp; white bean tagliatelle</title>
-        
+            
+    
     <cuisineTypes>
-            
+                  
+      
       <cuisineType value="Italian">Italian</cuisineType>
-            
+                  
+      
       <cuisineType value="Japanese">Japanese</cuisineType>
           
     </cuisineTypes>
@@ -67,7 +74,8 @@
   </recipe>
     
   <recipe id="5">
-        
+                
+    
     <title>Beetroot &amp; feta pasta</title>
         
     <cuisineTypes>
@@ -101,313 +109,655 @@
   <recipe id="7">
         
     <title>Mushroom soup</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="American">American</cuisineType>
-            
-      <cuisineType value="Japanese">Japanese</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="American">American</cuisineType>
+                        
+      
+      
+      <cuisineType value="Japanese">Japanese</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="8">
-        
+                
+    
+    
     <title>Squash &amp; halloumi flatbreads with sweet chilli beetroot jam</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Asian">Asian</cuisineType>
-            
-      <cuisineType value="Mexican">Mexican</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Beginner">Beginner</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                        
+      
+      
+      <cuisineType value="Mexican">Mexican</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Beginner">Beginner</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="9">
-        
+                
+    
+    
     <title>Simple squash risotto</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Indian">Indian</cuisineType>
-            
-      <cuisineType value="Japanese">Japanese</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Intermediate">Intermediate</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Indian">Indian</cuisineType>
+                        
+      
+      
+      <cuisineType value="Japanese">Japanese</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Intermediate">Intermediate</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="10">
-        
+                
+    
+    
     <title>Creamy beans</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="American">American</cuisineType>
-            
-      <cuisineType value="Asian">Asian</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Beginner">Beginner</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="American">American</cuisineType>
+                        
+      
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Beginner">Beginner</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="11">
-        
+                
+    
+    
     <title>Slow cooker spiced root &amp; lentil casserole</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
-            
-      <cuisineType value="French">French</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
+                        
+      
+      
+      <cuisineType value="French">French</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="12">
-        
+                
+    
+    
     <title>Squash &amp; spinach fusilli with pecans</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="French">French</cuisineType>
-            
-      <cuisineType value="American">American</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="French">French</cuisineType>
+                        
+      
+      
+      <cuisineType value="American">American</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="13">
-        
+                
+    
+    
     <title>Easy vegetable curry</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Asian">Asian</cuisineType>
-            
-      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Beginner">Beginner</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                        
+      
+      
+      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Beginner">Beginner</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="14">
-        
+                
+    
+    
     <title>Sausage &amp; butternut squash shells</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="American">American</cuisineType>
-            
-      <cuisineType value="Indian">Indian</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="American">American</cuisineType>
+                        
+      
+      
+      <cuisineType value="Indian">Indian</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="15">
-        
+                
+    
+    
     <title>Autumn vegetable soup with cheesy toasts</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Italian">Italian</cuisineType>
-            
-      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Beginner">Beginner</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Italian">Italian</cuisineType>
+                        
+      
+      
+      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Beginner">Beginner</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="16">
-        
+                
+    
+    
     <title>Mushroom &amp; sausage pasta</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="American">American</cuisineType>
-            
-      <cuisineType value="Italian">Italian</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Intermediate">Intermediate</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="American">American</cuisineType>
+                        
+      
+      
+      <cuisineType value="Italian">Italian</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Intermediate">Intermediate</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="17">
-        
+                
+    
+    
     <title>Creamy pumpkin &amp; lentil soup</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="French">French</cuisineType>
-            
-      <cuisineType value="Asian">Asian</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="French">French</cuisineType>
+                        
+      
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="18">
-        
+                
+    
+    
     <title>Curried parsnip soup</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Italian">Italian</cuisineType>
-            
-      <cuisineType value="Mexican">Mexican</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Intermediate">Intermediate</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Italian">Italian</cuisineType>
+                        
+      
+      
+      <cuisineType value="Mexican">Mexican</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Intermediate">Intermediate</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="19">
-        
+                
+    
+    
     <title>Red onion gravy</title>
-        
+                
+    
+    
     <cuisineTypes>
-            
+                        
+      
+      
       <cuisineType value="Japanese">Japanese</cuisineType>
-            
+                        
+      
+      
       <cuisineType value="Italian">Italian</cuisineType>
-          
+                      
+    
+    
     </cuisineTypes>
-        
+                
+    
+    
     <difficulty level="Beginner">Beginner</difficulty>
-      
+              
+  
+  
   </recipe>
-    
+        
+  
+  
   <recipe id="20">
-        
+                
+    
+    
     <title>Butternut squash pilaf</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
-            
-      <cuisineType value="Mexican">Mexican</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Mediterranean">Mediterranean</cuisineType>
+                        
+      
+      
+      <cuisineType value="Mexican">Mexican</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="21">
-        
+                
+    
+    
     <title>Sausage &amp; maple swede traybake</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="French">French</cuisineType>
-            
-      <cuisineType value="Asian">Asian</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
-      
-  </recipe>
+                
     
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="French">French</cuisineType>
+                        
+      
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="22">
-        
+                
+    
+    
     <title>Cauliflower mac &amp; cheese</title>
-        
+                
+    
+    
     <cuisineTypes>
-            
+                        
+      
+      
       <cuisineType value="Mediterranean">Mediterranean</cuisineType>
-            
+                        
+      
+      
       <cuisineType value="American">American</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Intermediate">Intermediate</difficulty>
-      
-  </recipe>
+                      
     
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Intermediate">Intermediate</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
   <recipe id="23">
-        
+                
+    
+    
     <title>Mustardy pork &amp; apples</title>
-        
+                
+    
+    
     <cuisineTypes>
-            
-      <cuisineType value="Indian">Indian</cuisineType>
-            
-      <cuisineType value="Mexican">Mexican</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Intermediate">Intermediate</difficulty>
+                        
       
+      
+      <cuisineType value="Indian">Indian</cuisineType>
+                        
+      
+      
+      <cuisineType value="Mexican">Mexican</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Intermediate">Intermediate</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
+  <recipe id="24">
+                
+    
+    
+    <title>Confit tomatoes with creamy beans</title>
+                
+    
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                        
+      
+      
+      <cuisineType value="French">French</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Intermediate">Intermediate</difficulty>
+              
+  
+  
+  </recipe>
+        
+  
+  
+  <recipe id="25">
+                
+    
+    
+    <title>Savour the season</title>
+                
+    
+    
+    <cuisineTypes>
+                        
+      
+      
+      <cuisineType value="Mexican">Mexican</cuisineType>
+                        
+      
+      
+      <cuisineType value="Indian">Indian</cuisineType>
+                      
+    
+    
+    </cuisineTypes>
+                
+    
+    
+    <difficulty level="Advanced">Advanced</difficulty>
+              
+  
+  
+  </recipe>
+      
+  
+  
+  <recipe id="26">
+            
+    
+    <title>sdasda</title>
+            
+    
+    <cuisineTypes>
+                  
+      
+      <cuisineType value="Asian">Asian</cuisineType>
+                  
+      
+      <cuisineType value="Mexican">Mexican</cuisineType>
+                
+    
+    </cuisineTypes>
+            
+    
+    <difficulty level="Beginner">Beginner</difficulty>
+          
+  
   </recipe>
     
-  <recipe id="24">
+  
+  <recipe id="27">
         
-    <title>Confit tomatoes with creamy beans</title>
+    <title>asdasda</title>
         
     <cuisineTypes>
-            
-      <cuisineType value="Asian">Asian</cuisineType>
             
       <cuisineType value="French">French</cuisineType>
+            
+      <cuisineType value="Mexican">Mexican</cuisineType>
           
     </cuisineTypes>
         
     <difficulty level="Intermediate">Intermediate</difficulty>
-      
-  </recipe>
-    
-  <recipe id="25">
-        
-    <title>Savour the season</title>
-        
-    <cuisineTypes>
-            
-      <cuisineType value="Mexican">Mexican</cuisineType>
-            
-      <cuisineType value="Indian">Indian</cuisineType>
-          
-    </cuisineTypes>
-        
-    <difficulty level="Advanced">Advanced</difficulty>
       
   </recipe>
   
-  <recipe id="26">
-    <title>sdasda</title>
+  <recipe id="28">
+    <title>test</title>
     <cuisineTypes>
       <cuisineType value="Asian">Asian</cuisineType>
-      <cuisineType value="Mexican">Mexican</cuisineType>
+      <cuisineType value="French">French</cuisineType>
     </cuisineTypes>
-    <difficulty level="Beginner">Beginner</difficulty>
+    <difficulty level="Intermediate">Intermediate</difficulty>
   </recipe>
 </recipes>

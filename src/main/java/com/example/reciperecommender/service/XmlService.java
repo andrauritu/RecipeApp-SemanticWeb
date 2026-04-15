@@ -175,6 +175,25 @@ public class XmlService {
         }
     }
 
+    public User getUserById(String id) {
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            String expression = String.format("/users/user[@id='%s']", id);
+            Element userEl = (Element) xpath.evaluate(
+                    expression, usersDocument, XPathConstants.NODE);
+            if (userEl == null) {
+                return null;
+            }
+            String name = userEl.getElementsByTagName("name").item(0).getTextContent().trim();
+            String surname = userEl.getElementsByTagName("surname").item(0).getTextContent().trim();
+            String cookingSkillLevel = userEl.getElementsByTagName("cookingSkillLevel").item(0).getTextContent().trim();
+            String preferredCuisineType = userEl.getElementsByTagName("preferredCuisineType").item(0).getTextContent().trim();
+            return new User(id, name, surname, cookingSkillLevel, preferredCuisineType);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get user by id: " + id, e);
+        }
+    }
+
     public Recipe getRecipeById(String id) {
         try {
             XPath xpath = XPathFactory.newInstance().newXPath();
